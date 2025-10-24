@@ -1,0 +1,11 @@
+{
+  "name": "stock-market-backend",
+  "version": "1.0.0",
+  "description": "Backend API to handle stock market data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "VikasPattar",
+  "license": "ISC"
+}

@@ -11,7 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+
+
 backend/node_modules
+./stock-notes.txt
 
 # Editor directories and files
 .vscode/*

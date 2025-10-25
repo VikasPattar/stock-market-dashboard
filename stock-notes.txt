@@ -1,0 +1,93 @@
+Major companies : 
+
+    Apple 
+
+
+Finhub : 
+    api call : 
+        base_url : `https://finnhub.io/api/v1`
+
+        endpoints :     
+            stock_profile : "/stock/profile2"
+                query parameters : 
+                    token : <api_key>
+                    symbol : <ticker_symbol>
+
+                code to api call : 
+                    app.get('/', (req, res)=>{
+
+                        let {token, symbol} = req.query
+
+                        try{
+                            axios.get(`${base_url}${stock_profile}?token=${token}&symbol=${symbol}`)
+                            .then((response)=>{
+                                res.status(200).json({
+                                    success : true,
+                                    data : response.data
+                                })
+                            })
+                            .catch((err)=>{
+                                res.status(400).json({
+                                    success : false,
+                                    error : err.message
+                                })
+                            })
+                        }catch(err){
+                            res.status(400).json({
+                                success : false,
+                                error : err.message
+                            })
+                        }
+                    })
+
+            quote : "/quote"
+                query_parameters : 
+                    token : <api_key>
+                    symbol : <ticket_symbol>
+
+                code to api call :
+                    app.get('/price', (req, res)=>{
+                        let {token, symbol} = req.query
+                        let response_data ={}
+                        axios.get(`${base_url}${quote}?token=${token}&symbol=${symbol}`)
+                        .then((response)=>{
+                            let {c} = response.data
+                            response_data.price = c
+                        })
+                        .catch((err)=>{
+                            res.json({error : err.message})
+                        })
+                        res.json(response_data)
+                    })
+
+end points we need in our backend api
+    /stocke-profile : 
+        provides the stock profile of a stock or company
+
+    /price : 
+        fetches the current price of a particular stock
+
+    /holdings/add
+        adds a buy transaction whenwe buy a stock 
+
+Holdings : 
+    - to represent holdings we need few field values
+    - table should contain field values 
+        symbol
+        name
+        quantity - tells how many share of the stock you have purchased
+        avg_buy_price
+        current_price
+        market_value = current_price*qunatity
+
+Transactions : 
+    - to represent transactions we need a table with fields
+        transaction_id 
+        symbol
+        transaction_type - buy, sell
+        quantity - # fo shares 
+        price - price per share
+        total-value = quantity*price
+        date
+
+
